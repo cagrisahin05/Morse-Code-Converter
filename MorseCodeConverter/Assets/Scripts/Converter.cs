@@ -22,22 +22,25 @@ public class Converter : MonoBehaviour
     void Cevirmeİslemi()
     {
         string latinCharacter = inputField.text.ToLower();
-        int length = latinCharacter.Length;
-        for (int i = 0; i < length; i++)
-        {
+        string sonuc = "";
+        
 
-            if (latinToMorse.TryGetValue(latinCharacter, out string morseTranslation))
+        for (int i = 0; i < latinCharacter.Length ; i++)
+        {
+            string harf = latinCharacter[i].ToString(); 
+            if (latinToMorse.TryGetValue(harf, out string morseTranslation))
             {
-                outputText.text = morseTranslation;
+                sonuc += morseTranslation;
 
             }
             else
             {
-                outputText.text = "Gecersiz";
+                sonuc += "Gecersiz";
 
             }
+        
         }
-
+        outputText.text = sonuc;
     }
 
     void CeviriKarsiligi()
