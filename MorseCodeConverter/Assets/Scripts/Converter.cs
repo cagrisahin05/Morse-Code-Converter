@@ -15,27 +15,27 @@ public class Converter : MonoBehaviour
     void Start()
     {
         CeviriKarsiligi();
-        inputField.onEndEdit.AddListener(delegate { if (Input.GetKeyDown(KeyCode.Return)) Cevirmeİslemi(); });
+        inputField.onValueChanged.AddListener(delegate { Cevirmeİslemi(); });
     }
 
 
     void Cevirmeİslemi()
     {
-        string latinCharacter = inputField.text.ToLower();
-        string sonuc = "";
+        string latinCharacter = inputField.text.ToLower(); 
+        string sonuc = ""; 
         
 
-        for (int i = 0; i < latinCharacter.Length ; i++)
+        for (int i = 0; i < latinCharacter.Length ; i++) 
         {
             string harf = latinCharacter[i].ToString(); 
             if (latinToMorse.TryGetValue(harf, out string morseTranslation))
             {
-                sonuc += morseTranslation;
+                sonuc += morseTranslation + " ";
 
             }
             else
             {
-                sonuc += "Gecersiz";
+                sonuc += "Gecersiz" + " ";
 
             }
         
