@@ -7,15 +7,17 @@ using UnityEngine.UI;
 
 public class Converter : MonoBehaviour
 {
-
     Dictionary<string, string> latinToMorse;
+    SoundManager soundManagerScript;
     public TMPro.TMP_InputField inputField;
     public TMPro.TMP_Text outputText;
+    
 
     void Start()
     {
         CeviriKarsiligi();
         inputField.onValueChanged.AddListener(delegate { Cevirmeİslemi(); });
+        soundManagerScript = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
 
@@ -23,11 +25,19 @@ public class Converter : MonoBehaviour
     {
         string latinCharacter = inputField.text.ToLower(); 
         string sonuc = ""; 
+
         
 
         for (int i = 0; i < latinCharacter.Length ; i++) 
         {
             string harf = latinCharacter[i].ToString(); 
+            
+            if (harf == " ")
+            {
+                sonuc += " ";
+                continue;
+            }
+
             if (latinToMorse.TryGetValue(harf, out string morseTranslation))
             {
                 sonuc += morseTranslation + " ";
@@ -41,6 +51,7 @@ public class Converter : MonoBehaviour
         
         }
         outputText.text = sonuc;
+        SesCikar(sonuc);
     }
 
     void CeviriKarsiligi()
@@ -85,5 +96,26 @@ public class Converter : MonoBehaviour
         latinToMorse.Add(" ", " ");
     }
 
+    void SesCikar(string morseCode)
+    {
+       StartCoroutine(PlayMorse(morseCode));
+    }
+    System.Collections.IEnumerator PlayMorse(string morseCode)
+    {
+        Debug.Log("Playing Morse: " + morseCode);
+
+        foreach (char c in morseCode)
+        {
+            if (c == '.')
+            {
+                soundManagerScript.PlayDotSound();
+            }
+            else if (c == '-')
+            {
+                soundManagerScript.PlayDashSound();
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+    }   
 
 }
