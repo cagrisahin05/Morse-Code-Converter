@@ -11,13 +11,80 @@ public class Converter : MonoBehaviour
     SoundManager soundManagerScript;
     public TMPro.TMP_InputField inputField;
     public TMPro.TMP_Text outputText;
+    public AudioSource audioSource;
+
+    private string[] morseArray;
     
+    private int currentIndex = 0;
+    private int symbolIndex = 0;
+    private float symbolTimer = 0.0f;
+    private float letterGapTimer = 0.0f;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         CeviriKarsiligi();
         inputField.onValueChanged.AddListener(delegate { Cevirmeİslemi(); });
         soundManagerScript = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
+   void Update()
+    {
+        if (morseArray == null || morseArray.Length == 0)
+            return;
+
+        
+        if (currentIndex < morseArray.Length)
+        {
+            string currentToken = morseArray[currentIndex];
+
+        
+            if (string.IsNullOrEmpty(currentToken))
+            {
+                letterGapTimer += Time.deltaTime;
+                if (letterGapTimer >= 0.3f)
+                {
+                    letterGapTimer = 0f;
+                    currentIndex++;
+                }
+            }
+            else
+            {
+    
+                if (symbolIndex < currentToken.Length)
+                {
+                    char currentSymbol = currentToken[symbolIndex];
+                    float symbolDelay = (currentSymbol == '.') ? 0.1f : (currentSymbol == '-' ? 0.4f : 0.1f);
+
+                    symbolTimer += Time.deltaTime;
+                    if (symbolTimer >= symbolDelay)
+                    {
+                        symbolTimer = 0f;
+
+                        // Play the corresponding sound from SoundManager.
+                        if (currentSymbol == '.')
+                        {
+                            soundManagerScript.PlayDotSound();
+                        }
+                        else if (currentSymbol == '-')
+                        {
+                            soundManagerScript.PlayDashSound();
+                        }
+
+                        symbolIndex++;
+                    }
+                }
+                else
+                {
+                    letterGapTimer += Time.deltaTime;
+                    if (letterGapTimer >= 0.3f)
+                    {
+                        letterGapTimer = 0f;
+                        currentIndex++;
+                        symbolIndex = 0;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -25,33 +92,31 @@ public class Converter : MonoBehaviour
     {
         string latinCharacter = inputField.text.ToLower(); 
         string sonuc = ""; 
+    
 
         
 
         for (int i = 0; i < latinCharacter.Length ; i++) 
         {
-            string harf = latinCharacter[i].ToString(); 
-            
+            string harf = latinCharacter[i].ToString();
+
             if (harf == " ")
             {
                 sonuc += " ";
-                continue;
             }
-
-            if (latinToMorse.TryGetValue(harf, out string morseTranslation))
+            else if (latinToMorse.ContainsKey(harf))
             {
-                sonuc += morseTranslation + " ";
-
-            }
-            else
-            {
-                sonuc += "Gecersiz" + " ";
-
+                sonuc += latinToMorse[harf] + " ";
             }
         
         }
         outputText.text = sonuc;
-        SesCikar(sonuc);
+        morseArray = sonuc.Split(' ');
+        currentIndex = 0;
+        symbolIndex = 0;
+        symbolTimer = 0.0f;
+        letterGapTimer = 0.0f;
+       
     }
 
     void CeviriKarsiligi()
@@ -96,26 +161,6 @@ public class Converter : MonoBehaviour
         latinToMorse.Add(" ", " ");
     }
 
-    void SesCikar(string morseCode)
-    {
-       StartCoroutine(PlayMorse(morseCode));
-    }
-    System.Collections.IEnumerator PlayMorse(string morseCode)
-    {
-        Debug.Log("Playing Morse: " + morseCode);
-
-        foreach (char c in morseCode)
-        {
-            if (c == '.')
-            {
-                soundManagerScript.PlayDotSound();
-            }
-            else if (c == '-')
-            {
-                soundManagerScript.PlayDashSound();
-            }
-            yield return new WaitForSeconds(0.2f);
-        }
-    }   
+ 
 
 }
