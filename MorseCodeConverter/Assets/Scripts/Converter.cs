@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class Converter : MonoBehaviour
 {
-    Dictionary<string, string> latinToMorse;
     SoundManager soundManagerScript;
     public TMPro.TMP_InputField inputField;
     public TMPro.TMP_Text outputText;
     public AudioSource audioSource;
 
-    private string[] morseArray;
     
+    Dictionary<string, string> latinToMorse;
+    private string[] morseArray;
     private int currentIndex = 0;
     private int symbolIndex = 0;
     private float symbolTimer = 0.0f;
@@ -53,7 +53,7 @@ public class Converter : MonoBehaviour
                 if (symbolIndex < currentToken.Length)
                 {
                     char currentSymbol = currentToken[symbolIndex];
-                    float symbolDelay = (currentSymbol == '.') ? 0.1f : (currentSymbol == '-' ? 0.4f : 0.1f);
+                    float symbolDelay = (currentSymbol == '.') ? 0.1f : (currentSymbol == '-' ? 0.1f : 0.4f);
 
                     symbolTimer += Time.deltaTime;
                     if (symbolTimer >= symbolDelay)
@@ -88,13 +88,11 @@ public class Converter : MonoBehaviour
     }
 
 
-    void Cevirmeİslemi()
+    public void Cevirmeİslemi()
     {
         string latinCharacter = inputField.text.ToLower(); 
         string sonuc = ""; 
     
-
-        
 
         for (int i = 0; i < latinCharacter.Length ; i++) 
         {
@@ -121,46 +119,19 @@ public class Converter : MonoBehaviour
 
     void CeviriKarsiligi()
     {
-        latinToMorse = new Dictionary<string, string>();
-        latinToMorse.Add("a", ".-");
-        latinToMorse.Add("b", "-...");
-        latinToMorse.Add("c", "-.-.");
-        latinToMorse.Add("d", "-..");
-        latinToMorse.Add("e", ".");
-        latinToMorse.Add("f", "..-.");
-        latinToMorse.Add("g", "--.");
-        latinToMorse.Add("h", "....");
-        latinToMorse.Add("i", "..");
-        latinToMorse.Add("j", ".---");
-        latinToMorse.Add("k", "-.-");
-        latinToMorse.Add("l", ".-..");
-        latinToMorse.Add("m", "--");
-        latinToMorse.Add("n", "-.");
-        latinToMorse.Add("o", "---");
-        latinToMorse.Add("p", ".--.");
-        latinToMorse.Add("q", "--.-");
-        latinToMorse.Add("r", ".-.");
-        latinToMorse.Add("s", "...");
-        latinToMorse.Add("t", "-");
-        latinToMorse.Add("u", "..-");
-        latinToMorse.Add("v", "...-");
-        latinToMorse.Add("w", ".--");
-        latinToMorse.Add("x", "-..-");
-        latinToMorse.Add("y", "-.--");
-        latinToMorse.Add("z", "--..");
-        latinToMorse.Add("1", ".----");
-        latinToMorse.Add("2", "..---");
-        latinToMorse.Add("3", "...--");
-        latinToMorse.Add("4", "....-");
-        latinToMorse.Add("5", ".....");
-        latinToMorse.Add("6", "-....");
-        latinToMorse.Add("7", "--...");
-        latinToMorse.Add("8", "---..");
-        latinToMorse.Add("9", "----.");
-        latinToMorse.Add("0", "-----");
-        latinToMorse.Add(" ", " ");
+       latinToMorse = new Dictionary<string, string>()
+        {
+            {"a", ".-"}, {"b", "-..."}, {"c", "-.-."}, {"d", "-.."}, {"e", "."},
+            {"f", "..-."}, {"g", "--."}, {"h", "...."}, {"i", ".."}, {"j", ".---"},
+            {"k", "-.-"}, {"l", ".-.."}, {"m", "--"}, {"n", "-."}, {"o", "---"},
+            {"p", ".--."}, {"q", "--.-"}, {"r", ".-."}, {"s", "..."}, {"t", "-"},
+            {"u", "..-"}, {"v", "...-"}, {"w", ".--"}, {"x", "-..-"}, {"y", "-.--"},
+            {"z", "--.."}, {"1", ".----"}, {"2", "..---"}, {"3", "...--"}, {"4", "....-"},
+            {"5", "....."}, {"6", "-...."}, {"7", "--..."}, {"8", "---.."}, {"9", "----."},
+            {"0", "-----"}
+        };
     }
-
+  
  
 
 }
