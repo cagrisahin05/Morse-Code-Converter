@@ -90,6 +90,8 @@ public class DecoderManager : MonoBehaviour
                         morseCharacter.SetOn(morseCharacter.IDOT);
                         morseCharacter.SetOn(morseCharacter.FLine);
                         morseCharacter.SetOn(morseCharacter.FDOT);
+                        morseCharacter.SetOn(morseCharacter.ULine);
+                        morseCharacter.SetOn(morseCharacter.UDash);
                         break;
 
                     case "--.": // G
@@ -142,8 +144,8 @@ public class DecoderManager : MonoBehaviour
                     case ".-..": // L
                         morseCharacter.SetOn(morseCharacter.ELine);
                         morseCharacter.SetOn(morseCharacter.EDOT);
-                        morseCharacter.SetOn(morseCharacter.ILine);
-                        morseCharacter.SetOn(morseCharacter.IDOT);
+                        morseCharacter.SetOn(morseCharacter.ALine);
+                        morseCharacter.SetOn(morseCharacter.ADash);
                         morseCharacter.SetOn(morseCharacter.RLine);
                         morseCharacter.SetOn(morseCharacter.RDOT);
                         morseCharacter.SetOn(morseCharacter.LLine);
@@ -178,8 +180,8 @@ public class DecoderManager : MonoBehaviour
                         morseCharacter.SetOn(morseCharacter.EDOT);
                         morseCharacter.SetOn(morseCharacter.ALine);
                         morseCharacter.SetOn(morseCharacter.ADash);
-                        morseCharacter.SetOn(morseCharacter.RLine);
-                        morseCharacter.SetOn(morseCharacter.RDOT);
+                        morseCharacter.SetOn(morseCharacter.WLine);
+                        morseCharacter.SetOn(morseCharacter.WDash);
                         morseCharacter.SetOn(morseCharacter.PLine);
                         morseCharacter.SetOn(morseCharacter.PDOT);
                         break;
@@ -228,7 +230,9 @@ public class DecoderManager : MonoBehaviour
                         morseCharacter.SetOn(morseCharacter.EDOT);
                         morseCharacter.SetOn(morseCharacter.ILine);
                         morseCharacter.SetOn(morseCharacter.IDOT);
-                        morseCharacter.SetOn(morseCharacter.VLine);
+                        morseCharacter.SetOn(morseCharacter.SLine);
+                        morseCharacter.SetOn(morseCharacter.SDOT);
+                        morseCharacter.SetOn(morseCharacter.YLine);
                         morseCharacter.SetOn(morseCharacter.VDash);
                         break;
 
@@ -242,6 +246,10 @@ public class DecoderManager : MonoBehaviour
                     case "-..-": // X
                         morseCharacter.SetOn(morseCharacter.TLine);
                         morseCharacter.SetOn(morseCharacter.TDash);
+                        morseCharacter.SetOn(morseCharacter.NLine);
+                        morseCharacter.SetOn(morseCharacter.NDOT);
+                        morseCharacter.SetOn(morseCharacter.DLine);
+                        morseCharacter.SetOn(morseCharacter.DDOT);
                         morseCharacter.SetOn(morseCharacter.XLine);
                         morseCharacter.SetOn(morseCharacter.XDash);
                         break;
@@ -249,6 +257,11 @@ public class DecoderManager : MonoBehaviour
                     case "-.--": // Y
                         morseCharacter.SetOn(morseCharacter.TLine);
                         morseCharacter.SetOn(morseCharacter.TDash);
+                        morseCharacter.SetOn(morseCharacter.NLine);
+                        morseCharacter.SetOn(morseCharacter.NDOT);
+                        morseCharacter.SetOn(morseCharacter.VLine);
+                        morseCharacter.SetOn(morseCharacter.KDash);
+                        morseCharacter.SetOn(morseCharacter.KDash);
                         morseCharacter.SetOn(morseCharacter.YLine);
                         morseCharacter.SetOn(morseCharacter.YDash);
                         break;
@@ -260,6 +273,8 @@ public class DecoderManager : MonoBehaviour
                         morseCharacter.SetOn(morseCharacter.MDash);
                         morseCharacter.SetOn(morseCharacter.ZLine);
                         morseCharacter.SetOn(morseCharacter.ZDOT);
+                        morseCharacter.SetOn(morseCharacter.GLine);
+                        morseCharacter.SetOn(morseCharacter.GDOT);
                         break;
                 }
             }
