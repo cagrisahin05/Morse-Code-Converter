@@ -231,6 +231,82 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &276103071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8632977277472158704, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
+  m_PrefabInstance: {fileID: 4082094350896687545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &276103073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276103071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f08d4306b4fb24a982a357fc554021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMaterial: {fileID: 2100000, guid: 474521c735e1ec040bdd6e570e3ae7d6, type: 2}
+  offMaterial: {fileID: 2100000, guid: 9f8b148ce86da124b84857f95f8f8d8a, type: 2}
+  TriangleLine: {fileID: 4082094350896687601}
+  TriangleLine2: {fileID: 4082094350896687600}
+  TriangleLine3: {fileID: 4082094350896687599}
+  TriangleLine4: {fileID: 4082094350896687598}
+  TriangleLine5: {fileID: 4082094350896687597}
+  TLine: {fileID: 4082094350896687596}
+  ELine: {fileID: 4082094350896687595}
+  ALine: {fileID: 4082094350896687594}
+  NLine: {fileID: 4082094350896687593}
+  DLine: {fileID: 4082094350896687592}
+  KLine: {fileID: 4082094350896687591}
+  GLine: {fileID: 4082094350896687590}
+  OLine: {fileID: 4082094350896687589}
+  MLine: {fileID: 4082094350896687588}
+  RLine: {fileID: 4082094350896687587}
+  WLine: {fileID: 4082094350896687586}
+  JLine: {fileID: 4082094350896687585}
+  PLine: {fileID: 4082094350896687584}
+  ULine: {fileID: 4082094350896687583}
+  FLine: {fileID: 4082094350896687582}
+  ILine: {fileID: 4082094350896687581}
+  LLine: {fileID: 4082094350896687580}
+  VLine: {fileID: 4082094350896687579}
+  SLine: {fileID: 4082094350896687578}
+  HLine: {fileID: 4082094350896687577}
+  BLine: {fileID: 4082094350896687576}
+  XLine: {fileID: 4082094350896687575}
+  CLine: {fileID: 4082094350896687574}
+  YLine: {fileID: 4082094350896687573}
+  ZLine: {fileID: 4082094350896687572}
+  QLine: {fileID: 309875453}
+  SDOT: {fileID: 4082094350896687561}
+  HDOT: {fileID: 4082094350896687560}
+  LDOT: {fileID: 4082094350896687559}
+  BDOT: {fileID: 4082094350896687558}
+  FDOT: {fileID: 4082094350896687564}
+  IDOT: {fileID: 4082094350896687562}
+  EDOT: {fileID: 4082094350896687563}
+  RDOT: {fileID: 4082094350896687565}
+  PDOT: {fileID: 4082094350896687566}
+  DDOT: {fileID: 4082094350896687567}
+  CDOT: {fileID: 4082094350896687568}
+  NDOT: {fileID: 4082094350896687569}
+  ZDOT: {fileID: 4082094350896687570}
+  GDOT: {fileID: 4082094350896687571}
+  TDash: {fileID: 984208195}
+  UDash: {fileID: 4082094350896687556}
+  ADash: {fileID: 4082094350896687555}
+  WDash: {fileID: 4082094350896687554}
+  JDash: {fileID: 4082094350896687553}
+  VDash: {fileID: 4082094350896687552}
+  MDash: {fileID: 4082094350896687551}
+  ODash: {fileID: 4082094350896687550}
+  QDash: {fileID: 4082094350896687549}
+  XDash: {fileID: 4082094350896687548}
+  YDash: {fileID: 4082094350896687547}
+  KDash: {fileID: 4082094350896687546}
 --- !u!1 &308890434
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +441,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308890434}
   m_CullTransparentMesh: 1
+--- !u!1 &309875453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2077939878380764395, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
+  m_PrefabInstance: {fileID: 4082094350896687545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &363738049
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 659625821}
-  - component: {fileID: 659625820}
+  - component: {fileID: 659625822}
   m_Layer: 0
   m_Name: DecoderManager
   m_TagString: Untagged
@@ -810,76 +891,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &659625820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659625819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f08d4306b4fb24a982a357fc554021, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onMaterial: {fileID: 2100000, guid: 474521c735e1ec040bdd6e570e3ae7d6, type: 2}
-  offMaterial: {fileID: 2100000, guid: 9f8b148ce86da124b84857f95f8f8d8a, type: 2}
-  TriangleLine: {fileID: 4082094350896687601}
-  TriangleLine2: {fileID: 4082094350896687600}
-  TriangleLine3: {fileID: 4082094350896687599}
-  TriangleLine4: {fileID: 4082094350896687598}
-  TriangleLine5: {fileID: 4082094350896687597}
-  TLine: {fileID: 4082094350896687596}
-  ELine: {fileID: 4082094350896687595}
-  ALine: {fileID: 4082094350896687594}
-  NLine: {fileID: 4082094350896687593}
-  DLine: {fileID: 4082094350896687592}
-  KLine: {fileID: 4082094350896687591}
-  GLine: {fileID: 4082094350896687590}
-  OLine: {fileID: 4082094350896687589}
-  MLine: {fileID: 4082094350896687588}
-  RLine: {fileID: 4082094350896687587}
-  WLine: {fileID: 4082094350896687586}
-  JLine: {fileID: 4082094350896687585}
-  PLine: {fileID: 4082094350896687584}
-  ULine: {fileID: 4082094350896687583}
-  FLine: {fileID: 4082094350896687582}
-  ILine: {fileID: 4082094350896687581}
-  LLine: {fileID: 4082094350896687580}
-  VLine: {fileID: 4082094350896687579}
-  SLine: {fileID: 4082094350896687578}
-  HLine: {fileID: 4082094350896687577}
-  BLine: {fileID: 4082094350896687576}
-  XLine: {fileID: 4082094350896687575}
-  CLine: {fileID: 4082094350896687574}
-  YLine: {fileID: 4082094350896687573}
-  ZLine: {fileID: 4082094350896687572}
-  GDOT: {fileID: 4082094350896687571}
-  ZDOT: {fileID: 4082094350896687570}
-  NDOT: {fileID: 4082094350896687569}
-  CDOT: {fileID: 4082094350896687568}
-  DDOT: {fileID: 4082094350896687567}
-  PDOT: {fileID: 4082094350896687566}
-  RDOT: {fileID: 4082094350896687565}
-  FDOT: {fileID: 4082094350896687564}
-  EDOT: {fileID: 4082094350896687563}
-  IDOT: {fileID: 4082094350896687562}
-  SDOT: {fileID: 4082094350896687561}
-  HDOT: {fileID: 4082094350896687560}
-  LDOT: {fileID: 4082094350896687559}
-  BDOT: {fileID: 4082094350896687558}
-  TDash: {fileID: 4082094350896687557}
-  UDash: {fileID: 4082094350896687556}
-  ADash: {fileID: 4082094350896687555}
-  WDash: {fileID: 4082094350896687554}
-  JDash: {fileID: 4082094350896687553}
-  VDash: {fileID: 4082094350896687552}
-  MDash: {fileID: 4082094350896687551}
-  ODash: {fileID: 4082094350896687550}
-  QDash: {fileID: 4082094350896687549}
-  XDash: {fileID: 4082094350896687548}
-  YDash: {fileID: 4082094350896687547}
-  KDash: {fileID: 4082094350896687546}
 --- !u!4 &659625821
 Transform:
   m_ObjectHideFlags: 0
@@ -895,6 +906,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &659625822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659625819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c566daa0c0d200d4e9e2c3eae4e58418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  converter: {fileID: 465708184}
+  morseCharacter: {fileID: 276103073}
+  inputField: {fileID: 2142266956}
 --- !u!1 &675791068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,6 +1337,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &984208195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1171130887199870553, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
+  m_PrefabInstance: {fileID: 4082094350896687545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1267457043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,7 +2129,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8632977277472158704, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 276103073}
   m_SourcePrefab: {fileID: 100100000, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
 --- !u!1 &4082094350896687546 stripped
 GameObject:
@@ -2153,11 +2187,6 @@ GameObject:
 --- !u!1 &4082094350896687556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3787411126965942977, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
-  m_PrefabInstance: {fileID: 4082094350896687545}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4082094350896687557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6043065763817852641, guid: 260980618bb64614b88b9cd465222fb5, type: 3}
   m_PrefabInstance: {fileID: 4082094350896687545}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4082094350896687558 stripped

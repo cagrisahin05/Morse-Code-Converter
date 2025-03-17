@@ -86,7 +86,7 @@ public class MorseCharacter : MonoBehaviour
         SetMaterial(obj, onMaterial);
     }
 
-    private void SetMaterial(GameObject obj, Material material)
+    private void SetMaterial(GameObject obj, Material material) 
     {
         Renderer renderer = obj.GetComponent<Renderer>();
         if (renderer != null)

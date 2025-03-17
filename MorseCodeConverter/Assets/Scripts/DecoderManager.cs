@@ -200,6 +200,8 @@ public class DecoderManager : MonoBehaviour
                     case ".-.": // R
                         morseCharacter.SetOn(morseCharacter.ELine);
                         morseCharacter.SetOn(morseCharacter.EDOT);
+                        morseCharacter.SetOn(morseCharacter.ALine);
+                        morseCharacter.SetOn(morseCharacter.ADash);
                         morseCharacter.SetOn(morseCharacter.RLine);
                         morseCharacter.SetOn(morseCharacter.RDOT);
                         break;
