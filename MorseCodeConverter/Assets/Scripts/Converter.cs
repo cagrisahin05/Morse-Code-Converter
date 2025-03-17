@@ -1,168 +1,199 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Converter : MonoBehaviour
 {
-    SoundManager soundManagerScript;
-    public TMPro.TMP_InputField inputField;
-    public TMPro.TMP_Text outputText;
-    public AudioSource audioSource;
+    private SoundManager soundManagerScript;
+    public TMP_InputField inputField;
+    public TMP_Text outputText;
 
-    Dictionary<string, string> latinToMorse;
+    private Dictionary<string, string> latinToMorse;
     private string[] morseArray;
-    private bool shouldPlay = false;
+    private Queue<string> letterQueue = new Queue<string>();
+
     private int currentIndex = 0;
     private int symbolIndex = 0;
     private float symbolTimer = 0.0f;
     private float letterGapTimer = 0.0f;
-    private string previousInput = "";
+
+    private bool shouldPlay = false;
+    private bool isCurrentlyPlaying = false;
+    private bool isPlayingLetter = false;
     private bool playNewLetterOnly = false;
 
-
+    private float dotDuration = 0.2f;
+    private float dashDuration = 0.5f;
+    private float symbolGap = 0.2f;
+    private string previousInput = "";
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        CeviriKarsiligi();
+        InitializeMorseDictionary();
         inputField.onValueChanged.AddListener(OnInputValueChanged);
         soundManagerScript = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
-   void Update()
+    void Update()
     {
         if (!shouldPlay || morseArray == null || morseArray.Length == 0) return;
-        
 
-        if (currentIndex >= morseArray.Length)
-        {
-            StopPlayback();
-            return;
-        }
-
-        string currentToken = morseArray[currentIndex];
-
-        if (string.IsNullOrEmpty(currentToken))
-        {
-            letterGapTimer += Time.deltaTime;
-            if (letterGapTimer >= 0.6f)
-            {
-                letterGapTimer = 0f;
-                currentIndex++;
-            }
-        }
-        else
-        {
-            if (symbolIndex < currentToken.Length)
-            {
-                char currentSymbol = currentToken[symbolIndex];
-                float symbolDelay = (currentSymbol == '.') ? 0.2f : (currentSymbol == '-' ? 0.2f : 0.8f);
-
-                symbolTimer += Time.deltaTime;
-                if (symbolTimer >= symbolDelay)
-                {
-                    symbolTimer = 0f;
-
-                    if (currentSymbol == '.')
-                    {
-                        soundManagerScript.PlayDotSound();
-                    }
-                    else if (currentSymbol == '-')
-                    {
-                        soundManagerScript.PlayDashSound();
-                    }
-
-                    symbolIndex++;
-                }
-            }
-            else
-            {
-                letterGapTimer += Time.deltaTime;
-                if (letterGapTimer >= 0.6f)
-                {
-                    letterGapTimer = 0f;
-                    currentIndex++;
-                    symbolIndex = 0;
-                }
-            }
-        }
+        HandleMorsePlayback();
     }
-     private void OnInputValueChanged(string newValue)
+
+    private void OnInputValueChanged(string newValue)
     {
         if (newValue.Length > previousInput.Length)
         {
             string newLetter = newValue[newValue.Length - 1].ToString().ToLower();
-            string morseCode = "";
-            
+
             if (latinToMorse.ContainsKey(newLetter))
             {
-                morseCode = latinToMorse[newLetter];
+                string morseCode = latinToMorse[newLetter];
                 outputText.text += morseCode + " ";
-                morseArray = new string[] { morseCode };
-                playNewLetterOnly = true;
-                StartPlayback();
+
+                letterQueue.Enqueue(morseCode);
+
+                if (!isPlayingLetter)
+                {
+                    PlayNextLetter();
+                }
             }
         }
+
         previousInput = newValue;
-        
-        Cevirmeİslemi();
+        UpdateMorseOutput();
     }
-    void ResetTimers()
+
+    private void HandleMorsePlayback()
     {
-        currentIndex = 0;
-        symbolIndex = 0;
-        symbolTimer = 0.0f;
-        letterGapTimer = 0.0f;
+        if (isCurrentlyPlaying)
+        {
+            symbolTimer += Time.deltaTime;
+            float currentDuration = morseArray[currentIndex][symbolIndex] == '.' ? dotDuration : dashDuration;
 
+            if (symbolTimer >= currentDuration)
+            {
+                symbolTimer = 0;
+                symbolIndex++;
+
+                if (symbolIndex >= morseArray[currentIndex].Length)
+                {
+                    symbolIndex = 0;
+                    currentIndex++;
+
+                    if (currentIndex >= morseArray.Length)
+                    {
+                        FinishCurrentLetter();
+                    }
+                    else
+                    {
+                        letterGapTimer = 0;
+                        isCurrentlyPlaying = false;
+                    }
+                }
+                else
+                {
+                    isCurrentlyPlaying = false;
+                }
+            }
+        }
+        else
+        {
+            letterGapTimer += Time.deltaTime;
+            if (letterGapTimer >= symbolGap)
+            {
+                if (currentIndex < morseArray.Length && symbolIndex < morseArray[currentIndex].Length)
+                {
+                    PlaySymbol(morseArray[currentIndex][symbolIndex]);
+                    isCurrentlyPlaying = true;
+                    letterGapTimer = 0;
+                }
+            }
+        }
     }
 
-    public void StartPlayback()
+    private void PlayNextLetter()
+    {
+        if (letterQueue.Count > 0 && !isPlayingLetter)
+        {
+            string nextMorse = letterQueue.Dequeue();
+            morseArray = new string[] { nextMorse };
+            isPlayingLetter = true;
+            StartPlayback();
+        }
+    }
+
+    private void StartPlayback()
     {
         shouldPlay = true;
-       
         ResetTimers();
     }
-    public void StopPlayback()
+
+    private void StopPlayback()
     {
         shouldPlay = false;
         ResetTimers();
+        isCurrentlyPlaying = false;
     }
 
-    public void Cevirmeİslemi()
+    private void ResetTimers()
+    {
+        currentIndex = 0;
+        symbolIndex = 0;
+        symbolTimer = 0;
+        letterGapTimer = 0;
+    }
+
+    private void FinishCurrentLetter()
+    {
+        StopPlayback();
+        isPlayingLetter = false;
+        PlayNextLetter();
+    }
+
+    private void UpdateMorseOutput()
     {
         if (!playNewLetterOnly)
         {
-       
-            string latinCharacter = inputField.text.ToLower(); 
-            string sonuc = ""; 
-        
+            string latinText = inputField.text.ToLower();
+            string result = "";
 
-            for (int i = 0; i < latinCharacter.Length ; i++) 
+            foreach (char character in latinText)
             {
-                string harf = latinCharacter[i].ToString();
-
-                if (harf == " ")
+                if (character == ' ')
                 {
-                    sonuc += " ";
+                    result += " ";
                 }
-                else if (latinToMorse.ContainsKey(harf))
+                else if (latinToMorse.ContainsKey(character.ToString()))
                 {
-                    sonuc += latinToMorse[harf] + " ";
+                    result += latinToMorse[character.ToString()] + " ";
                 }
-            
             }
-            outputText.text = sonuc;
-            
+
+            outputText.text = result;
         }
+
         playNewLetterOnly = false;
     }
 
-    void CeviriKarsiligi()
+    private void PlaySymbol(char symbol)
     {
-       latinToMorse = new Dictionary<string, string>()
+        if (symbol == '.')
+        {
+            soundManagerScript.PlayDotSound();
+        }
+        else if (symbol == '-')
+        {
+            soundManagerScript.PlayDashSound();
+        }
+    }
+
+    private void InitializeMorseDictionary()
+    {
+        latinToMorse = new Dictionary<string, string>()
         {
             {"a", ".-"}, {"b", "-..."}, {"c", "-.-."}, {"d", "-.."}, {"e", "."},
             {"f", "..-."}, {"g", "--."}, {"h", "...."}, {"i", ".."}, {"j", ".---"},
@@ -174,7 +205,4 @@ public class Converter : MonoBehaviour
             {"0", "-----"}
         };
     }
-  
- 
-
 }
